@@ -33,17 +33,21 @@
                     <td> {$filme['nome']} </td>
                     <td> {$filme['descricao']} </td>
                     <td>");
+                    $nota = $filme['nota'];
                     for ($i=0; $i < 5; $i++) { 
-                        if($filme['nota'] > 0){
+                        if($nota > 0){
                             echo ("<img src='../img/estrela.png' width='20px'>");
-                            $filme['nota'] = $filme['nota'] - 1;
+                            $nota--;
                         }else{
                             echo ("<img src='../img/estrelaApagada.png' width='20px'>");
                         }
                     }
                 echo("</td>
                     <td><img src='../img/{$filme['img']}' width='20px' alt=''> </td>
-                    <td><button class='btn btn-success'>Editar</button> <button class='btn btn-danger'>Excluir</button></td>
+                    <form method='get'>
+                        <input type='hidden' name='id' value='{$filme['id']}'>
+                        <td><a href='editar.php?id={$filme['id']}' class='btn btn-success'>Editar</a> <button class='btn btn-danger'>Excluir</button></td>
+                    </form>
                 </tr>
                 ");
             }

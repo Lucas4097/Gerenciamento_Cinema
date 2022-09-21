@@ -25,6 +25,11 @@ class Cinemas {
         $cadastro->execute();
         echo "sucesso";
     }
+
+    public function listarID($id){
+        return $this->conexao->query("SELECT * FROM filmes_series WHERE id = $id")->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 
 ?>
