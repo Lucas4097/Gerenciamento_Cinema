@@ -26,10 +26,23 @@ $filme->listarID($_GET['id']);
         <input class="form-control" type="file" id="formFile" name="img">
         <label for="formFile" class="form-label">Imagem  <img src="../img/<?=$cinema['img']?>" width="20px" alt=""></label>
         <br>
-        <button class="btn btn-success" type="submit" name="cadastro">Cadastrar</button>
+        <button class="btn btn-success" type="submit" name="editar">Editar</button>
     </form>
 
     <a href="painel.php">painel</a>
+
+
+    <?php
+    if(isset($_POST['editar'])){
+        if(!empty($_POST['nome']) && !empty($_POST['descricao']) && !empty($_POST['nota']) && !empty($_FILES['img']['name'])){
+            require_once "../controller/controller.php";
+            $arquivo = $_FILES['img'];
+            $cinema = new Cinemas;
+            $cinema->editar($_POST['nome'], $_POST['descricao'], $_POST['nota'], $arquivo['name'], $_GET['id']);
+        }
+    }
+
+    ?>
 
 </body>
 </html>

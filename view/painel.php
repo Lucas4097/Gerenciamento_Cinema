@@ -46,7 +46,7 @@
                     <td><img src='../img/{$filme['img']}' width='20px' alt=''> </td>
                     <form method='get'>
                         <input type='hidden' name='id' value='{$filme['id']}'>
-                        <td><a href='editar.php?id={$filme['id']}' class='btn btn-success'>Editar</a> <button class='btn btn-danger'>Excluir</button></td>
+                        <td><a href='editar.php?id={$filme['id']}' class='btn btn-success'>Editar</a> <button type='submit' name='excluir' class='btn btn-danger'>Excluir</button></td>
                     </form>
                 </tr>
                 ");
@@ -55,7 +55,12 @@
         </tbody>
     </table>
     <a href="cadastro.php">Cadastro</a>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <?php
+    if(isset($_GET['excluir'])){
+        $cinema->excluir($_GET['id']);
+    }
+    ?>
 </body>
 
 </html>

@@ -29,6 +29,14 @@ class Cinemas {
     public function listarID($id){
         return $this->conexao->query("SELECT * FROM filmes_series WHERE id = $id")->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function editar($nome, $descricao, $nota, $img, $id){
+        return $this->conexao->query("UPDATE filmes_series SET nome = '$nome', descricao = '$descricao', nota = '$nota', img = '$img' WHERE id = '$id'");
+    }
+
+    public function excluir($id){
+        return $this->conexao->query("DELETE FROM filmes_series WHERE id = $id");
+    }
     
 }
 

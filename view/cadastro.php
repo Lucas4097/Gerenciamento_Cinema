@@ -13,7 +13,14 @@
         <label>Nome</label>
         <textarea class="form-control" name="descricao"></textarea>
         <label>Descrição</label>
-        <input class="form-control" name="nota" type="number">
+        <!-- <input class="form-control" name="nota" type="number"> -->
+        <select name="nota" id="">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
         <label>Nota</label>
         <input class="form-control" type="file" id="formFile" name="img">
         <label for="formFile" class="form-label">Imagem</label>
