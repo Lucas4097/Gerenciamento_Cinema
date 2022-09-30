@@ -6,21 +6,26 @@ class Cinemas {
 
     public function __construct(){
         try{
-        $this->conexao = new PDO("mysql:dbname=crud_cinema;host=localhost", "root", "");
+        $this->conexao = new PDO("mysql:dbname=cinema;host=localhost", "root", "");
         }catch(PDOException $e){
             echo("Erro com o banco:" .$e);
         }
     }
 
-    public function listar(){
-        return $this->conexao->query("SELECT * FROM filmes_series")->fetchAll(PDO::FETCH_ASSOC);
+    public function listarFilme(){
+        return $this->conexao->query("SELECT * FROM filmes_series WHERE tipo = 'filme' LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function criar($nome, $descricao, $nota, $img){
-        $cadastro = $this->conexao->prepare("INSERT INTO filmes_series(nome, descricao, nota, img) VALUES (:nome, :descricao, :nota, :img)");
+    public function listarSerie(){
+        return $this->conexao->query("SELECT * FROM filmes_series WHERE tipo = 'serie' LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function criar($nome, $descricao, $nota, $tipo ,$img){
+        $cadastro = $this->conexao->prepare("INSERT INTO filmes_series(nome, descricao, nota, tipo ,img) VALUES (:nome, :descricao, :nota, :tipo, :img)");
         $cadastro->bindParam(":nome", $nome);
         $cadastro->bindParam(":descricao", $descricao);
         $cadastro->bindParam(":nota", $nota);
+        $cadastro->bindParam(":tipo", $tipo);
         $cadastro->bindParam(":img", $img);
         $cadastro->execute();
         echo "sucesso";
@@ -36,6 +41,20 @@ class Cinemas {
 
     public function excluir($id){
         return $this->conexao->query("DELETE FROM filmes_series WHERE id = $id");
+    }
+
+    public function nota($nota){
+        for ($i=0; $i < 5; $i++) { 
+            if($nota >= 1){
+                echo ("<img src='../assets/img/estrela.png' width='20px' height='20px'>");
+                $nota--;
+            }elseif($nota > 0){
+                echo ("<img src='../assets/img/estrelaHalf.png' width='20px' height='20px'>");
+                $nota--;
+            }else{
+                echo ("<img src='../assets/img/estrelaVazia.png' width='20px' height='20px'>");
+            }
+        }
     }
     
 }
