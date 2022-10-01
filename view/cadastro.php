@@ -51,9 +51,7 @@
                 </div>
                 <button class="btn btn-danger" type="submit" name="cadastro">Cadastrar</button>
             </form>
-        </div>
-    </section>
-
+        
     <?php
     if(isset($_POST['cadastro'])){
         if(!empty($_POST['nome']) && !empty($_POST['descricao']) && !empty($_POST['nota']) && !empty($_POST['tipo']) && !empty($_FILES['img']['name'])){
@@ -63,10 +61,13 @@
             $cinema = new Cinemas;
             $cinema->criar($_POST['nome'], $_POST['descricao'], $_POST['nota'], $_POST['tipo'] ,$arquivo['name']);
         }else{
-            echo "Campos vazios!";
+            echo "<div>
+                    <p class='alert alert-danger mt-2'>Campos vázios!</p>
+                </div>";
         }
     }
-
     ?>
+        </div>
+    </section>
 </body>
 </html>

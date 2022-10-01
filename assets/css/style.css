@@ -151,6 +151,7 @@
   }
   
   .flip-card {
+    margin: 30px;
     background-color: transparent;
     width: 200px;
     height: 300px;
@@ -197,7 +198,8 @@
   
   main.cord{
     display:flex;
-    padding: 32px;
+    flex-wrap: wrap;
+    row-gap: 80px;
     justify-content: space-evenly;
   }
   

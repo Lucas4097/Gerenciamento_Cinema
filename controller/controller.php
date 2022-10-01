@@ -13,11 +13,11 @@ class Cinemas {
     }
 
     public function listarFilme(){
-        return $this->conexao->query("SELECT * FROM filmes_series WHERE tipo = 'filme' LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+        return $this->conexao->query("SELECT * FROM filmes_series WHERE tipo = 'filme'")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function listarSerie(){
-        return $this->conexao->query("SELECT * FROM filmes_series WHERE tipo = 'serie' LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+        return $this->conexao->query("SELECT * FROM filmes_series WHERE tipo = 'serie'")->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function criar($nome, $descricao, $nota, $tipo ,$img){
@@ -28,15 +28,25 @@ class Cinemas {
         $cadastro->bindParam(":tipo", $tipo);
         $cadastro->bindParam(":img", $img);
         $cadastro->execute();
-        echo "sucesso";
+        echo "<div>
+                <p class='alert alert-success'>Cadastrado com sucesso!</p>
+                </div>";
     }
 
     public function listarID($id){
         return $this->conexao->query("SELECT * FROM filmes_series WHERE id = $id")->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function editar($nome, $descricao, $nota, $img, $id){
-        return $this->conexao->query("UPDATE filmes_series SET nome = '$nome', descricao = '$descricao', nota = '$nota', img = '$img' WHERE id = '$id'");
+    public function editar($nome, $descricao, $tipo, $nota, $img, $id){
+        $editar = $this->conexao->prepare("UPDATE filmes_series SET nome = :nome, descricao = :descricao, nota = :nota, tipo = :tipo, img = :img WHERE id = :id");
+        $editar->bindParam(":nome", $nome);
+        $editar->bindParam(":descricao", $descricao);
+        $editar->bindParam(":nota", $nota);
+        $editar->bindParam(":tipo", $tipo);
+        $editar->bindParam(":img", $img);
+        $editar->bindParam(":id", $id);
+        $editar->execute();
+        echo "<div><p class='alert alert-success mt-2'>Editado com sucesso!</p></div>";
     }
 
     public function excluir($id){

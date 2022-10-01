@@ -98,7 +98,7 @@
         <h2 class="serie">SÉRIES</h2>
     </div>
 
-    <main class="cord">
+    <main id="serie" class="cord">
         <?php
         foreach ($serie as $key => $serie) {
         ?>
@@ -120,7 +120,7 @@
                   </div>
                 </div>
             </div>
-          <form method="post" class="mt-3">
+          <form method="post" class="my-3">
             <a href="editar.php?id=<?=$serie['id']?>" class="btn btn-success">Editar</a>
             <input type="hidden" name="id" value="<?=$serie['id']?>">
             <button name="excluir" type="submit" class="btn btn-danger">Excluir</button>

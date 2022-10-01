@@ -68,24 +68,23 @@
                     <input class="form-control" type="file" id="formFile" name="img">
                     <label for="formFile" class="form-label">Imagem</label>
                 </div>
-                <button class="btn btn-danger" type="submit" name="cadastro">Editar</button>
+                <button class="btn btn-danger" type="submit" name="editar">Editar</button>
             </form>
             <div class="col-2">
                 <img src="../assets/img/<?=$cinema['img']?>" width="230px" height="300px" alt="">
             </div>
-        </div>
-    </section>
-
     <?php
     if(isset($_POST['editar'])){
-        if(!empty($_POST['nome']) && !empty($_POST['descricao']) && !empty($_POST['nota']) && !empty($_FILES['img']['name'])){
-            require_once "../controller/controller.php";
+        if(!empty($_POST['nome']) && !empty($_POST['descricao']) && !empty($_POST['nota']) && !empty($_FILES['img']['name']) && !empty($_POST['tipo'])){
             $arquivo = $_FILES['img'];
             $cinema = new Cinemas;
-            $cinema->editar($_POST['nome'], $_POST['descricao'], $_POST['nota'], $arquivo['name'], $_GET['id']);
+            $cinema->editar($_POST['nome'], $_POST['descricao'], $_POST['tipo'], $_POST['nota'], $arquivo['name'], $_GET['id']);
+        }else{
+            echo "<div><p class='alert alert-danger mt-2'>Campos vázios!</p></div>";
         }
     }
-
     ?>
+        </div>
+    </section>
 </body>
 </html>
